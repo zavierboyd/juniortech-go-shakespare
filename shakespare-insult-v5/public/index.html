@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakespeare Insult Generator</title>
+    <style>
+        body {
+            background-color: beige;
+        }
+
+        h1 {
+            font-size: calc(16px + 2vw);
+            color: #4f3838;
+        }
+
+        #insult {
+            font-size: calc(20px + 4vw);
+            margin: 5px;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0;
+            border: none;
+            font-size: calc(16px + 2vw);
+            flex: 1;
+            background: transparent;
+        }
+
+        button:focus,
+        button:hover {
+            outline: none;
+            text-decoration: underline;
+        }
+
+        #insult::before {
+            content: '“';
+        }
+
+        #insult::after {
+            content: '”';
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+
+        }
+
+        #another {
+            color: #466446;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Shakespeare Insult Generator</h1>
+    <p id="insult"></p>
+    <div class="buttons">
+        <button id="another">Get another insult</button>
+    </div>
+    <script>
+        const insult = document.getElementById('insult');
+        const another = document.getElementById('another');
+
+        const getInsult = async () => {
+            const response = await fetch('/insult');
+            const data = await response.text();
+            insult.textContent = data;
+        }
+
+        another.addEventListener('click', getInsult);
+
+        getInsult();
+    </script>
+</body>
+
+</html>
